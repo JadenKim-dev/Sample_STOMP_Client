@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello WebSocket</title>
+    <script src="
+      https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
+    "></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"
+      integrity="sha512-1QvjE7BtotQjkq8PxLeF6P46gEpBRXuskzIVgjFpekzFVF4yjRgrQvTG1MTOJ3yQgvTteKAcO7DSZI92+u/yZw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "@stomp/stompjs": "https://ga.jspm.io/npm:@stomp/stompjs@7.0.0/esm6/index.js"
+        }
+      }
+    </script>
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <noscript
+      ><h2 style="color: #ff0000">
+        Seems your browser doesn't support Javascript! Websocket relies on
+        Javascript being enabled. Please enable Javascript and reload this page!
+      </h2></noscript
+    >
+    <div id="main-content" class="container">
+      <div class="row">
+        <div id="connectSocketForm">
+          <div class="col-md-6">
+            <form class="form-inline">
+              <div class="form-group">
+                <label for="name">인증 토큰을 입력하세요</label>
+                <input
+                  type="text"
+                  id="authToken"
+                  class="form-control"
+                  placeholder="auth token"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="connect">STOMP 소켓 연결하기:</label>
+              <button id="connect" class="btn btn-default">Connect</button>
+            </div>
+          </div>
+        </div>
+        <div id="chatEnterForm" hidden>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">meetId: </label>
+              <input type="text" id="meetId" placeholder="0000" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <button id="enterChat">채팅 참여하기</button>
+            </div>
+          </div>
+        </div>
+        <div id="chatTalkForm" hidden>
+          <div class="col-md-6">
+            <div>
+              <label for="chatMessage">chatMessage: </label>
+              <input type="text" id="chatMessage" placeholder="hi" />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <button id="talkChat">채팅하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        id="disconnect"
+        class="btn btn-default"
+        type="submit"
+        disabled="disabled"
+      >
+        Disconnect
+      </button>
+      <div class="row">
+        <div class="col-md-12">
+          <table id="conversation" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Greetings</th>
+              </tr>
+            </thead>
+            <tbody id="greetings"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
